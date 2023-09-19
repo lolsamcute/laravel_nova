@@ -15,51 +15,24 @@ Getting Started
 Follow these steps to get the project up and running:
 
 Clone the repository:
-
-bash
-Copy code
 git clone https://github.com/lolsamcute/Laravel_Nova.git
 Navigate to the project directory:
-
-bash
-Copy code
 cd project-name
 Install PHP dependencies:
-
-bash
-Copy code
 composer install
 Install frontend dependencies:
-
-bash
-Copy code
 npm install
 Copy the environment file:
-
-bash
-Copy code
 cp .env.example .env
 Generate an application key:
-
-bash
-Copy code
 php artisan key:generate
 Configure your database by editing the .env file with your database credentials.
 
 Migrate and seed the database:
-
-bash
-Copy code
 php artisan migrate --seed
 Start the development server:
-
-bash
-Copy code
 php artisan serve
 Access the application in your web browser:
-
-http
-Copy code
 http://localhost:8000
 Additional Information
 Laravel Documentation
