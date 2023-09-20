@@ -26,28 +26,33 @@ use PhpParser\NodeVisitorAbstract;
 
 /**
  * @internal This class is not covered by the backward compatibility promise for phpunit/php-code-coverage
- *
- * @psalm-import-type LinesType from \SebastianBergmann\CodeCoverage\StaticAnalysis\FileAnalyser
  */
 final class ExecutableLinesFindingVisitor extends NodeVisitorAbstract
 {
-    private int $nextBranch = 0;
-    private readonly string $source;
+    /**
+     * @var int
+     */
+    private $nextBranch = 0;
 
     /**
-     * @psalm-var LinesType
+     * @var string
      */
-    private array $executableLinesGroupedByBranch = [];
+    private $source;
 
     /**
-     * @psalm-var array<int, bool>
+     * @var array<int, int>
      */
-    private array $unsets = [];
+    private $executableLinesGroupedByBranch = [];
 
     /**
-     * @psalm-var array<int, string>
+     * @var array<int, bool>
      */
-    private array $commentsToCheckForUnset = [];
+    private $unsets = [];
+
+    /**
+     * @var array<int, string>
+     */
+    private $commentsToCheckForUnset = [];
 
     public function __construct(string $source)
     {
@@ -355,9 +360,6 @@ final class ExecutableLinesFindingVisitor extends NodeVisitorAbstract
         );
     }
 
-    /**
-     * @psalm-return LinesType
-     */
     public function executableLinesGroupedByBranch(): array
     {
         return $this->executableLinesGroupedByBranch;

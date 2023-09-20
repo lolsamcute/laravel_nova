@@ -10,8 +10,7 @@ class RoleOrPermissionMiddleware
 {
     public function handle($request, Closure $next, $roleOrPermission, $guard = null)
     {
-        $authGuard = Auth::guard($guard);
-        if ($authGuard->guest()) {
+        if (Auth::guard($guard)->guest()) {
             throw UnauthorizedException::notLoggedIn();
         }
 
@@ -19,7 +18,7 @@ class RoleOrPermissionMiddleware
             ? $roleOrPermission
             : explode('|', $roleOrPermission);
 
-        if (! $authGuard->user()->hasAnyRole($rolesOrPermissions) && ! $authGuard->user()->hasAnyPermission($rolesOrPermissions)) {
+        if (! Auth::guard($guard)->user()->hasAnyRole($rolesOrPermissions) && ! Auth::guard($guard)->user()->hasAnyPermission($rolesOrPermissions)) {
             throw UnauthorizedException::forRolesOrPermissions($rolesOrPermissions);
         }
 

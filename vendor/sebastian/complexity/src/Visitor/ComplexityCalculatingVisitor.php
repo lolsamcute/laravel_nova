@@ -17,7 +17,6 @@ use PhpParser\Node\Stmt;
 use PhpParser\Node\Stmt\Class_;
 use PhpParser\Node\Stmt\ClassMethod;
 use PhpParser\Node\Stmt\Function_;
-use PhpParser\Node\Stmt\Interface_;
 use PhpParser\Node\Stmt\Trait_;
 use PhpParser\NodeTraverser;
 use PhpParser\NodeVisitorAbstract;
@@ -27,8 +26,12 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
     /**
      * @psalm-var list<Complexity>
      */
-    private array $result = [];
-    private bool $shortCircuitTraversal;
+    private $result = [];
+
+    /**
+     * @var bool
+     */
+    private $shortCircuitTraversal;
 
     public function __construct(bool $shortCircuitTraversal)
     {
@@ -42,14 +45,6 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
         }
 
         if ($node instanceof ClassMethod) {
-            if ($node->getAttribute('parent') instanceof Interface_) {
-                return null;
-            }
-
-            if ($node->isAbstract()) {
-                return null;
-            }
-
             $name = $this->classMethodName($node);
         } else {
             $name = $this->functionName($node);
@@ -61,7 +56,7 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
 
         $this->result[] = new Complexity(
             $name,
-            $this->cyclomaticComplexity($statements),
+            $this->cyclomaticComplexity($statements)
         );
 
         if ($this->shortCircuitTraversal) {
@@ -78,8 +73,6 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
 
     /**
      * @param Stmt[] $statements
-     *
-     * @psalm-return positive-int
      */
     private function cyclomaticComplexity(array $statements): int
     {
@@ -95,9 +88,6 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
         return $cyclomaticComplexityCalculatingVisitor->cyclomaticComplexity();
     }
 
-    /**
-     * @psalm-return non-empty-string
-     */
     private function classMethodName(ClassMethod $node): string
     {
         $parent = $node->getAttribute('parent');
@@ -109,18 +99,11 @@ final class ComplexityCalculatingVisitor extends NodeVisitorAbstract
         return $parent->namespacedName->toString() . '::' . $node->name->toString();
     }
 
-    /**
-     * @psalm-return non-empty-string
-     */
     private function functionName(Function_ $node): string
     {
         assert(isset($node->namespacedName));
         assert($node->namespacedName instanceof Name);
 
-        $functionName = $node->namespacedName->toString();
-
-        assert($functionName !== '');
-
-        return $functionName;
+        return $node->namespacedName->toString();
     }
 }

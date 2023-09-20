@@ -9,8 +9,6 @@
  */
 namespace SebastianBergmann\LinesOfCode;
 
-use function assert;
-use function file_get_contents;
 use function substr_count;
 use PhpParser\Error;
 use PhpParser\Lexer;
@@ -40,8 +38,6 @@ final class Counter
             $linesOfCode = 1;
         }
 
-        assert($linesOfCode >= 0);
-
         try {
             $nodes = $this->parser()->parse($source);
 
@@ -53,16 +49,14 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
-                $error->getCode(),
-                $error,
+                (int) $error->getCode(),
+                $error
             );
         }
         // @codeCoverageIgnoreEnd
     }
 
     /**
-     * @psalm-param non-negative-int $linesOfCode
-     *
      * @param Node[] $nodes
      *
      * @throws RuntimeException
@@ -81,8 +75,8 @@ final class Counter
         } catch (Error $error) {
             throw new RuntimeException(
                 $error->getMessage(),
-                $error->getCode(),
-                $error,
+                (int) $error->getCode(),
+                $error
             );
         }
         // @codeCoverageIgnoreEnd

@@ -16,10 +16,9 @@ class React extends Preset
     {
         static::ensureComponentDirectoryExists();
         static::updatePackages();
-        static::updateViteConfiguration();
+        static::updateWebpackConfiguration();
         static::updateBootstrapping();
         static::updateComponent();
-        static::addViteReactRefreshDirective();
         static::removeNodeModules();
     }
 
@@ -32,23 +31,20 @@ class React extends Preset
     protected static function updatePackageArray(array $packages)
     {
         return [
-            '@vitejs/plugin-react' => '^2.2.0',
-            'react' => '^18.2.0',
-            'react-dom' => '^18.2.0',
-        ] + Arr::except($packages, [
-            '@vitejs/plugin-vue',
-            'vue'
-        ]);
+            '@babel/preset-react' => '^7.13.13',
+            'react' => '^17.0.2',
+            'react-dom' => '^17.0.2',
+        ] + Arr::except($packages, ['vue', 'vue-template-compiler']);
     }
 
     /**
-     * Update the Vite configuration.
+     * Update the Webpack configuration.
      *
      * @return void
      */
-    protected static function updateViteConfiguration()
+    protected static function updateWebpackConfiguration()
     {
-        copy(__DIR__.'/react-stubs/vite.config.js', base_path('vite.config.js'));
+        copy(__DIR__.'/react-stubs/webpack.mix.js', base_path('webpack.mix.js'));
     }
 
     /**
@@ -63,8 +59,8 @@ class React extends Preset
         );
 
         copy(
-            __DIR__.'/react-stubs/Example.jsx',
-            resource_path('js/components/Example.jsx')
+            __DIR__.'/react-stubs/Example.js',
+            resource_path('js/components/Example.js')
         );
     }
 
@@ -76,37 +72,5 @@ class React extends Preset
     protected static function updateBootstrapping()
     {
         copy(__DIR__.'/react-stubs/app.js', resource_path('js/app.js'));
-    }
-
-    /**
-     * Add Vite's React Refresh Runtime
-     *
-     * @return void
-     */
-    protected static function addViteReactRefreshDirective()
-    {
-        $view = static::getViewPath('layouts/app.blade.php');
-
-        if (! file_exists($view)) {
-            return;
-        }
-
-        file_put_contents(
-            $view,
-            str_replace('@vite(', '@viteReactRefresh'.PHP_EOL.'    @vite(', file_get_contents($view))
-        );
-    }
-
-    /**
-     * Get full view path relative to the application's configured view path.
-     *
-     * @param  string  $path
-     * @return string
-     */
-    protected static function getViewPath($path)
-    {
-        return implode(DIRECTORY_SEPARATOR, [
-            config('view.paths')[0] ?? resource_path('views'), $path,
-        ]);
     }
 }

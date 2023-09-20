@@ -59,13 +59,6 @@ class DatabaseStore implements LockProvider, Store
     protected $lockLottery;
 
     /**
-     * The default number of seconds that a lock should be held.
-     *
-     * @var int
-     */
-    protected $defaultLockTimeoutInSeconds;
-
-    /**
      * Create a new database store.
      *
      * @param  \Illuminate\Database\ConnectionInterface  $connection
@@ -76,18 +69,16 @@ class DatabaseStore implements LockProvider, Store
      * @return void
      */
     public function __construct(ConnectionInterface $connection,
-                                                    $table,
-                                                    $prefix = '',
-                                                    $lockTable = 'cache_locks',
-                                                    $lockLottery = [2, 100],
-                                                    $defaultLockTimeoutInSeconds = 86400)
+                                $table,
+                                $prefix = '',
+                                $lockTable = 'cache_locks',
+                                $lockLottery = [2, 100])
     {
         $this->table = $table;
         $this->prefix = $prefix;
         $this->connection = $connection;
         $this->lockTable = $lockTable;
         $this->lockLottery = $lockLottery;
-        $this->defaultLockTimeoutInSeconds = $defaultLockTimeoutInSeconds;
     }
 
     /**
@@ -139,7 +130,7 @@ class DatabaseStore implements LockProvider, Store
 
         try {
             return $this->table()->insert(compact('key', 'value', 'expiration'));
-        } catch (Exception) {
+        } catch (Exception $e) {
             $result = $this->table()->where('key', $key)->update(compact('value', 'expiration'));
 
             return $result > 0;
@@ -162,7 +153,7 @@ class DatabaseStore implements LockProvider, Store
 
         try {
             return $this->table()->insert(compact('key', 'value', 'expiration'));
-        } catch (QueryException) {
+        } catch (QueryException $e) {
             return $this->table()
                 ->where('key', $key)
                 ->where('expiration', '<=', $this->getTime())
@@ -286,8 +277,7 @@ class DatabaseStore implements LockProvider, Store
             $this->prefix.$name,
             $seconds,
             $owner,
-            $this->lockLottery,
-            $this->defaultLockTimeoutInSeconds
+            $this->lockLottery
         );
     }
 
@@ -381,7 +371,7 @@ class DatabaseStore implements LockProvider, Store
     {
         $result = serialize($value);
 
-        if ($this->connection instanceof PostgresConnection && str_contains($result, "\0")) {
+        if ($this->connection instanceof PostgresConnection && Str::contains($result, "\0")) {
             $result = base64_encode($result);
         }
 

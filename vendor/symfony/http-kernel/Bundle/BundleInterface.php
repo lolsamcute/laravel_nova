@@ -24,15 +24,11 @@ interface BundleInterface extends ContainerAwareInterface
 {
     /**
      * Boots the Bundle.
-     *
-     * @return void
      */
     public function boot();
 
     /**
      * Shutdowns the Bundle.
-     *
-     * @return void
      */
     public function shutdown();
 
@@ -40,30 +36,36 @@ interface BundleInterface extends ContainerAwareInterface
      * Builds the bundle.
      *
      * It is only ever called once when the cache is empty.
-     *
-     * @return void
      */
     public function build(ContainerBuilder $container);
 
     /**
      * Returns the container extension that should be implicitly loaded.
+     *
+     * @return ExtensionInterface|null
      */
-    public function getContainerExtension(): ?ExtensionInterface;
+    public function getContainerExtension();
 
     /**
      * Returns the bundle name (the class short name).
+     *
+     * @return string
      */
-    public function getName(): string;
+    public function getName();
 
     /**
      * Gets the Bundle namespace.
+     *
+     * @return string
      */
-    public function getNamespace(): string;
+    public function getNamespace();
 
     /**
      * Gets the Bundle directory path.
      *
      * The path should always be returned as a Unix path (with /).
+     *
+     * @return string
      */
-    public function getPath(): string;
+    public function getPath();
 }

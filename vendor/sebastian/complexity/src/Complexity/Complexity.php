@@ -15,36 +15,26 @@ namespace SebastianBergmann\Complexity;
 final class Complexity
 {
     /**
-     * @psalm-var non-empty-string
+     * @var string
      */
-    private readonly string $name;
+    private $name;
 
     /**
-     * @psalm-var positive-int
+     * @var int
      */
-    private int $cyclomaticComplexity;
+    private $cyclomaticComplexity;
 
-    /**
-     * @psalm-param non-empty-string $name
-     * @psalm-param positive-int $cyclomaticComplexity
-     */
     public function __construct(string $name, int $cyclomaticComplexity)
     {
         $this->name                 = $name;
         $this->cyclomaticComplexity = $cyclomaticComplexity;
     }
 
-    /**
-     * @psalm-return non-empty-string
-     */
     public function name(): string
     {
         return $this->name;
     }
 
-    /**
-     * @psalm-return positive-int
-     */
     public function cyclomaticComplexity(): int
     {
         return $this->cyclomaticComplexity;
