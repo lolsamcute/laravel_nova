@@ -94,7 +94,8 @@
                                 </p>
                             </a>
                             <ul class="nav nav-treeview">
-                                @can('create role')
+                               
+                               @if(Auth::user()->role == 'superadmin')
                                     <li class="nav-item">
                                         <a href="{{ route('role.index') }}" class="nav-link">
                                             <i class="fas fa-bomb nav-icon"></i>
@@ -107,13 +108,25 @@
                                             <p>Permissions</p>
                                         </a>
                                     </li>
-                                @endcan
+                               
+                               
                                 <li class="nav-item">
                                     <a href="{{ route('user.index') }}" class="nav-link">
                                         <i class="fas fa-users-cog nav-icon"></i>
                                         <p>Users</p>
                                     </a>
                                 </li>
+                                
+                                @endif
+                                
+                                <li class="nav-item">
+                                    <a href="{{ url('allPost') }}" class="nav-link">
+                                        <i class="fas fa-bomb nav-icon"></i>
+                                        <p>Post</p>
+                                    </a>
+                                </li>
+                                
+                                
                             </ul>
                         </li>
                         <li class="nav-item">

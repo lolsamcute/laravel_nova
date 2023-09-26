@@ -19,11 +19,11 @@ class UserController extends Controller
 
     public function getAll(){
         $users = User::latest()->get();
-        $users->transform(function($user){
-            $user->role = $user->getRoleNames()->first();
-            $user->userPermissions = $user->getPermissionNames();
-            return $user;
-        });
+        // $users->transform(function($user){
+        //     $user->role = $user->getRoleNames()->first();
+        //     $user->userPermissions = $user->getPermissionNames();
+        //     return $user;
+        // });
 
         return response()->json([
             'users' => $users
