@@ -8,73 +8,94 @@ use Illuminate\Support\Facades\Route;
 |--------------------------------------------------------------------------
 |
 | Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [App\Http\Controllers\Auth\AuthController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login']);
+
+// Auth::routes();
+
+// Route::middleware(['kreators.auth'])->group(function () {
+    // Your protected routes go here
+
+    Route::get('/app/dashboard', [App\Http\Controllers\HomeController::class, 'index'])->name('dashboard');
+    Route::get('/dashboard/filter', [App\Http\Controllers\HomeController::class, 'filterDashboard'])->name('filterDashboard');
+
+    //All User Dashboard
+    Route::get('/app/allUser/dashboard', [App\Http\Controllers\AllUserDasboardController::class, 'index'])->name('index');
+    Route::get('/get-filtered-sales', [App\Http\Controllers\AllUserDasboardController::class, 'getFilteredSales']);
+    Route::get('/app/user', [App\Http\Controllers\AllUserDasboardController::class, 'users'])->name('user.index');
+    Route::get('/filterUserDashboard', [App\Http\Controllers\AllUserDasboardController::class, 'filterUserDashboard'])->name('filterUserDashboard');
+    Route::get('/usersDeactivate/{Id}', [App\Http\Controllers\AllUserDasboardController::class, 'usersDeactivate'])->name('users.deactivate');
+    Route::get('/usersActivate/{Id}', [App\Http\Controllers\AllUserDasboardController::class, 'usersActivate'])->name('users.activate');
+    Route::get('/usersView/{Id}', [App\Http\Controllers\AllUserDasboardController::class, 'usersView'])->name('users.view');
 
 
-Route::group(['middleware' => 'auth'], function() {
-    Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-    
-    Route::get('/allPost', [App\Http\Controllers\HomeController::class, 'allPost'])->name('allPost');
-    Route::get('/createPost', [App\Http\Controllers\HomeController::class, 'create'])->name('create');
-    
-        Route::post('/createPost', [App\Http\Controllers\HomeController::class, 'createPost'])->name('createPost');
-    
-    
-    Route::get('/delete/{id}', [App\Http\Controllers\HomeController::class, 'delete'])->name('delete');
-    
-    Route::get('/edit/{id}', [App\Http\Controllers\HomeController::class, 'edit'])->name('edit');
-    
-    Route::post('/edit/{id}', [App\Http\Controllers\HomeController::class, 'editPost'])->name('editPost');
-    
-
-    Route::resource('user', 'UserController');
-
-    Route::resource('permission', 'PermissionController');
+    //All Kreators Dashboard
+    Route::get('/app/allKreators/dashboard', [App\Http\Controllers\AllKreatorsDasboardController::class, 'index'])->name('index');
+    Route::get('/get-filteredKreator', [App\Http\Controllers\AllKreatorsDasboardController::class, 'getFilteredSales']);
+    Route::get('/app/kreators', [App\Http\Controllers\AllKreatorsDasboardController::class, 'kreators'])->name('kreators.index');
+    Route::get('/filterKreatorsDashboard', [App\Http\Controllers\AllKreatorsDasboardController::class, 'filterKreatorsDashboard'])->name('filterKreatorsDashboard');
+    Route::get('/kreatorsDeactivate/{Id}', [App\Http\Controllers\AllKreatorsDasboardController::class, 'kreatorsDeactivate'])->name('kreators.deactivate');
+    Route::get('/kreatorsActivate/{Id}', [App\Http\Controllers\AllKreatorsDasboardController::class, 'kreatorsActivate'])->name('kreators.Activate');
+    Route::get('/kreatorsView/{Id}', [App\Http\Controllers\AllKreatorsDasboardController::class, 'kreatorsView'])->name('kreators.view');
 
 
-    Route::get('/profile', 'UserController@profile')->name('user.profile');
+    //All Affiliates Dashboard
+    Route::get('/app/allAffiliates/dashboard', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'index'])->name('index');
+    Route::get('/get-filteredAffiliate', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'getFilteredSales']);
+    Route::get('/app/affiliates', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'affiliates'])->name('affiliates.index');
+    Route::get('/filterAffiliatesDashboard', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'filterAffiliatesDashboard'])->name('filterAffiliatesDashboard');
+    Route::get('/affiliateDeactivate/{Id}', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'affiliateDeactivate'])->name('affiliates.deactivate');
+    Route::get('/affiliateActivate/{Id}', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'affiliateActivate'])->name('affiliates.Activate');
+    Route::get('/affiliateView/{Id}', [App\Http\Controllers\AllAffiliatesDasboardController::class, 'affiliateView'])->name('affiliates.view');
 
-    Route::post('/profile', 'UserController@postProfile')->name('user.postProfile');
+    //User Roles
+    Route::get('/app/user/roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('index');
 
-    Route::get('/password/change', 'UserController@getPassword')->name('userGetPassword');
+    //Store
+    Route::get('/app/store', [App\Http\Controllers\StoreController::class, 'index'])->name('index');
+    Route::get('/storeDeactivate/{Id}', [App\Http\Controllers\StoreController::class, 'storeDeactivate']);
+    Route::get('/storeActivate/{Id}', [App\Http\Controllers\StoreController::class, 'storeActivate']);
+    Route::get('/filterStore/{Id}', [App\Http\Controllers\StoreController::class, 'filterStore']);
+    Route::get('/app/switch/paymentMethod', [App\Http\Controllers\StoreController::class, 'switchPaymentMethod'])->name('switchPaymentMethod');
 
-    Route::post('/password/change', 'UserController@postPassword')->name('userPostPassword');
-});
+    //Products
+    Route::get('/app/products', [App\Http\Controllers\ProductController::class, 'products'])->name('products');
+    Route::get('/app/filter/products', [App\Http\Controllers\ProductController::class, 'filterProducts'])->name('filterProducts');
+
+    //Transactions
+    Route::get('/app/transactions', [App\Http\Controllers\TransactionsController::class, 'transactions'])->name('transactions');
+    Route::get('/app/filter/transactions', [App\Http\Controllers\TransactionsController::class, 'filterTransactions'])->name('filterTransactions');
+
+    //Withdrawal
+    Route::get('/app/withdrawal', [App\Http\Controllers\TransactionsController::class, 'withdrawal'])->name('withdrawal');
+
+    //Blog
+    Route::get('/app/blog', [App\Http\Controllers\BlogController::class, 'blogIndex'])->name('blogIndex');
+    Route::get('/app/blogdetails/{Id}', [App\Http\Controllers\BlogController::class, 'show'])->name('show');
+    Route::get('/app/blog/create', [App\Http\Controllers\BlogController::class, 'createBlog'])->name('createBlog');
+    Route::post('/app/blog/createPost', [App\Http\Controllers\BlogController::class, 'createBlogPost'])->name('createBlogPost');
+    Route::post('/add/category', [App\Http\Controllers\BlogController::class, 'createCategoryPost'])->name('createCategoryPost');
+    Route::post('/add/blog/delete/{Id}', [App\Http\Controllers\BlogController::class, 'deleteBlog'])->name('deleteBlog');
+    Route::post('/add/blog/unpublish/{Id}', [App\Http\Controllers\BlogController::class, 'unpublishBlog'])->name('unpublishBlog');
+    Route::get('/app/blog/editBlog/{Id}', [App\Http\Controllers\BlogController::class, 'editBlog'])->name('editBlog');
+    Route::post('/app/blog/editPost/{Id}', [App\Http\Controllers\BlogController::class, 'editPost'])->name('editPost');
+    Route::post('/app/comment/{Id}', [App\Http\Controllers\BlogController::class, 'commentPost'])->name('commentPost');
+    Route::post('/like/{Id}', [App\Http\Controllers\BlogController::class, 'likePost'])->name('likePost');
 
 
-Route::group(['middleware' => ['auth']], function() {
-
-    Route::resource('role', 'RoleController');
 
 
-});
+    //Tickets
+    Route::get('/app/tickets', [App\Http\Controllers\TicketsController::class, 'tickets'])->name('tickets');
+    Route::get('/ticket/view/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketView'])->name('ticketView');
+    Route::get('/ticket/reply/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketReply'])->name('ticketReply');
+    Route::post('/ticket/reply/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketReplyPost'])->name('ticketReplyPost');
+    Route::get('/ticket/open/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketOpen'])->name('ticketOpen');
+    Route::get('/ticket/close/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketClose'])->name('ticketClose');
+// });
 
-
-
-
-
-
-
-Auth::routes();
-
-
-//////////////////////////////// axios request
-
-Route::get('/getAllPermission', 'PermissionController@getAllPermissions');
-Route::post("/postRole", "RoleController@store");
-Route::get("/getAllUsers", "UserController@getAll");
-Route::get("/getAllRoles", "RoleController@getAll");
-Route::get("/getAllPermissions", "PermissionController@getAll");
-
-/////////////axios create user
-Route::post('/account/create', 'UserController@store');
-Route::put('/account/update/{id}', 'UserController@update');
-Route::delete('/delete/user/{id}', 'UserController@delete');
-Route::get('/search/user', 'UserController@search');
