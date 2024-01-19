@@ -90,7 +90,7 @@
                   </li>
 
                   <li>
-                      <a href="javascript: void(0);">
+                      <a href="/app/mailing">
                           <i data-feather="gift"></i>
                           <span data-key="t-ui-elements">Mailing List</span>
                       </a>
@@ -110,14 +110,14 @@
                           </li>
 
                           <li>
-                              <a href="{{ route('transactions') }}">
+                              <a href="/ticket/incidents">
                                   <span data-key="t-calendar">Incidents</span>
                               </a>
                           </li>
 
 
                           <li>
-                              <a href="{{ route('withdrawal') }}">
+                              <a href="/ticket/paymentIntegration">
                                   <span data-key="t-chat">Payment Integration</span>
                               </a>
                           </li>

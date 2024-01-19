@@ -11,7 +11,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="/logo/svg">
 
-
     <!-- DataTables -->
     <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
@@ -30,6 +29,17 @@
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
+
+    <!-- dropzone css -->
+    <link href="/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- choices css -->
+    <link href="/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
+
+    <!-- color picker css -->
+    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
+    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
+    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
 
 </head>
 
@@ -181,6 +191,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
+
         <div class="main-content">
 
             @include('layouts.badge')
@@ -190,293 +201,179 @@
                 <div class="container-fluid">
                     <div class="row">
 
+                        <a class="mb-sm-0 font-size-18" onclick="history.back()">
+                            < Back </a>
+                                <h2 class="text-center">Edit Mail</h2><br>
+                                <h6 class="text-center">Edit your post by using your own words and content</h6>
 
-                        <a href="">
-                            <a class="mb-sm-0 font-size-18" onclick="history.back()">
-                                < Back</a>
-                            </a>
-                            <h2 class="text-center">Tickets</h2><br>
+                                <div class="col-8">
 
+
+
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="card-body">
+
+                                                <div class="mt-4">
+                                                    <div class="col-lg-12 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="choices-multiple-remove-button"
+                                                                class="form-label font-size-16">To</label>
+                                                            <select class="form-control"
+                                                                name="choices-multiple-remove-button"
+                                                                id="choices-multiple-remove-button"
+                                                                placeholder="This is a placeholder" multiple>
+                                                                <option value="hdhdh@gmail.com" selected>
+                                                                    hdhdh@gmail.com</option>
+                                                                <option value="hdhdh@gmail.com">hdhdh@gmail.com
+                                                                </option>
+                                                                <option value="hdhdh@gmail.com">hdhdh@gmail.com
+                                                                </option>
+                                                                <option value="hdhdh@gmail.com">hdhdh@gmail.com
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- multi select input Example -->
+
+
+                                                <div class="mt-4">
+                                                    <div class="col-lg-12 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="choices-multiple-remove-button"
+                                                                class="form-label font-size-16">CC</label>
+                                                            <select class="form-control" data-trigger
+                                                                name="choices-single-groups"
+                                                                id="choices-single-groups">
+
+                                                                <optgroup label="UK">
+                                                                    <option value="London">London</option>
+                                                                    <option value="Manchester">Manchester
+                                                                    </option>
+                                                                    <option value="Liverpool">Liverpool
+                                                                    </option>
+                                                                </optgroup>
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- multi select input Example -->
+
+
+                                                <div>
+
+                                                    <div class="col-lg-12 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="choices-multiple-remove-button"
+                                                                class="form-label font-size-16">From</label>
+                                                            <select class="form-control"
+                                                                name="choices-single-no-search"
+                                                                id="choices-single-no-search">
+                                                                <option value="0">Zero</option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                    <div class="col-lg-12 col-md-6">
+                                                        <div class="mb-3">
+                                                            <label for="choices-multiple-remove-button"
+                                                                class="form-label font-size-16">Reply
+                                                                To</label>
+                                                            <select class="form-control"
+                                                                name="choices-single-no-sorting"
+                                                                id="choices-single-no-sorting">
+                                                                <option value="Madrid">Madrid</option>
+                                                                <option value="Toronto">Toronto
+                                                                </option>
+                                                                <option value="Vancouver">Vancouver
+                                                                </option>
+                                                                <option value="London">London</option>
+                                                                <option value="Manchester">Manchester
+                                                                </option>
+                                                                <option value="Liverpool">Liverpool
+                                                                </option>
+                                                                <option value="Paris">Paris</option>
+                                                                <option value="Malaga">Malaga</option>
+                                                                <option value="Washington" disabled>
+                                                                    Washington</option>
+                                                                <option value="Lyon">Lyon</option>
+                                                                <option value="Marseille">Marseille
+                                                                </option>
+                                                                <option value="Hamburg">Hamburg
+                                                                </option>
+                                                                <option value="Munich">Munich</option>
+                                                                <option value="Barcelona">Barcelona
+                                                                </option>
+                                                                <option value="Berlin">Berlin</option>
+                                                                <option value="Montreal">Montreal
+                                                                </option>
+                                                                <option value="New York">New York
+                                                                </option>
+                                                                <option value="Michigan">Michigan
+                                                                </option>
+                                                            </select>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <!-- Single select input Example -->
+
+                                                <div class="col-lg-12 col-md-6">
+                                                    <div class="mb-3">
+                                                        <label for="choices-multiple-remove-button"
+                                                            class="form-label font-size-16">Subject</label>
+                                                        <input class="form-control" name="choices-single-no-search">
+
+
+                                                    </div>
+                                                </div>
+
+
+
+                                                <div class="mt-4">
+
+                                                    <div class="col-lg-12">
+
+                                                        <label for="floatingInput">Body</label>
+
+                                                        <textarea name="Description" id="ckeditor-classic"></textarea>
+
+                                                    </div>
+
+
+                                                </div>
+
+
+                                            </div>
+                                            <!-- end card body -->
+
+                                        </div>
+                                        <!-- end col -->
+                                    </div>
+                                    <!-- end row -->
+
+                                </div>
+
+                                <div class="col-4">
+
+                                    <img src="/mailsidebar.png">
+                                </div>
                     </div>
                     <br><br><br>
                     <!-- start page title -->
 
-                    <div class="col-12">
-
-                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
-
-                            <form method="GET" action="">
-                                <div class="page-title-right">
-                                    <ol class="breadcrumb m-0">
-
-                                        <li>
-                                            <label>Search</label>
-                                            <input class="form-control" type="text" name="search"
-                                                placeholder="Click here to Search">
-                                        </li>
-
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-
-
-                                        <li>
-                                            <label>Show</label>
-                                            <select class="form-control col-lg-10" name="department">
-
-                                                <option value="Billing">
-                                                    Today
-                                                </option>
-
-                                            </select>
-                                        </li>
-
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <li>
-                                            <label>Incidents</label>
-                                            <select class="form-control col-lg" name="tickets">
-                                                <option value="All">
-                                                    Resolved
-                                                </option>
-
-                                            </select>
-                                        </li>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <li>
-                                            <label>From</label>
-                                            <input class="form-control" type="date" id="dateFrom"
-                                                name="dateFrom" value="{{ request('dateFrom') }}">
-                                        </li>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <li>
-                                            <label>To</label>
-                                            <input class="form-control" type="date" id="dateTo" name="dateTo"
-                                                value="{{ request('dateTo') }}">
-                                        </li>
-                                        &nbsp;&nbsp;&nbsp;&nbsp;
-
-                                        <li>
-                                            <label>.</label>
-                                            <button type="submit"
-                                                class="form-control btn btn-primary">Filter</button>
-                                        </li>
-                                    </ol>
-                                </div>
-                            </form>
-
-
-                        </div>
-                    </div>
-
-                    <!-- end page title -->
 
 
 
 
 
-                    <br>
-                    <!-- Start Ticket -->
-                    <div class="row">
 
 
-                        <div class="col-xl-3 col-md-6">
-                            <!-- card -->
-                            <div class="card card-h-100">
-                                <!-- card body -->
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-6">
-                                            <img src="/users.png" height="70" width="80">
-                                        </div>
-
-                                        <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">All Tickets</span>
-                                            <h4 class="mb-3">
-                                                <span class="counter-value"
-                                                    data-target="{{ $countAllTickets }}">{{ $countAllTickets }}</span>
-                                            </h4>
-                                        </div>
-
-
-                                    </div>
-
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-                        </div><!-- end col -->
-
-                        <div class="col-xl-3 col-md-6">
-                            <!-- card -->
-                            <div class="card card-h-100">
-                                <!-- card body -->
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-6">
-                                            <img src="/active.png" height="70" width="80">
-                                        </div>
-                                        <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Closed
-                                                Tickets</span>
-                                            <h4 class="mb-3">
-                                                <span class="counter-value"
-                                                    data-target="{{ $countClosedTickets }}">{{ $countClosedTickets }}</span>
-                                            </h4>
-                                        </div>
-
-                                    </div>
-
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-                        </div><!-- end col-->
-
-                        <div class="col-xl-3 col-md-6">
-                            <!-- card -->
-                            <div class="card card-h-100">
-                                <!-- card body -->
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-6">
-                                            <img src="/inactive.png" height="70" width="80">
-                                        </div>
-                                        <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Open
-                                                Tickets</span>
-                                            <h4 class="mb-3">
-                                                <span class="counter-value"
-                                                    data-target="{{ $countOpenTickets }}">{{ $countOpenTickets }}</span>
-                                            </h4>
-                                        </div>
-
-                                    </div>
-
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-                        </div><!-- end col -->
-
-                        <div class="col-xl-3 col-md-6">
-                            <!-- card -->
-                            <div class="card card-h-100">
-                                <!-- card body -->
-                                <div class="card-body">
-                                    <div class="row align-items-center">
-                                        <div class="col-6">
-                                            <img src="/deleted.png" height="70" width="80">
-                                        </div>
-                                        <div class="col-6">
-                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Admin
-                                                Replies</span>
-                                            <h4 class="mb-3">
-                                                <span class="counter-value"
-                                                    data-target="{{ $countAdminReplies }}">{{ $countAdminReplies }}</span>
-                                            </h4>
-                                        </div>
-
-                                    </div>
-
-                                </div><!-- end card body -->
-                            </div><!-- end card -->
-                        </div><!-- end col -->
-                    </div>
-
-                    <!--End Ticket -->
-
-
-
-                    <div class="table-responsive mb-4">
-                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
-                            <thead>
-                                <tr>
-                                    <th scope="col">Ticket ID</th>
-                                    <th scope="col">Customer Name</th>
-                                    <th scope="col">Subject</th>
-                                    <th scope="col">Department</th>
-                                    <th scope="col">Date</th>
-                                    <th scope="col">Status</th>
-                                    <th>Actions</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-
-                                @foreach ($getAllTickets as $ticket)
-                                    <tr>
-                                        <td>
-                                            {{ $ticket->TicketReference }}
-                                        </td>
-                                        <td>
-                                            {{ $ticket->Fullname ?? 'N/A' }}
-                                        </td>
-
-                                        <td>{{ $ticket->Heading ?? 'N/A' }}</a>
-                                        </td>
-
-
-
-                                        <td>{{ $ticket->Department ?? 'N/A' }}</td>
-                                        <td>{{ \Carbon\Carbon::parse($ticket->CreatedAt)->format('M jS Y, g:i A') }}
-                                        </td>
-                                        <td>
-                                            <div class="d-flex gap-2">
-                                                @if ($ticket->Status == 'open')
-                                                    <a class="badge bg-success-subtle text-success">Open</a>
-                                                @else
-                                                    <a class="badge bg-danger-danger-subtle text-danger">Closed</a>
-                                                @endif
-                                            </div>
-                                        </td>
-
-
-
-
-                                        <td>
-                                            <div class="dropdown">
-                                                <button
-                                                    class="btn btn-link font-size-16 shadow-none py-0 text-muted dropdown-toggle"
-                                                    type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="bx bx-dots-horizontal-rounded"></i>
-                                                </button>
-                                                <ul class="dropdown-menu dropdown-menu-end">
-
-                                                    <a class="dropdown-item"
-                                                        href="/ticket/view/{{ $ticket->Id }}"><img
-                                                            src="/deactivate.png" height="30" width="30">View
-                                                        Ticket</a>
-
-                                                    <a class="dropdown-item"
-                                                        href="/ticket/reply/{{ $ticket->Id }}"><img
-                                                            src="/otherProduct.png" height="30"
-                                                            width="30">Reply Ticket
-                                                    </a>
-
-
-                                                    @if ($ticket->Status == 'open')
-                                                        <a class="dropdown-item"
-                                                            href="/ticket/close/{{ $ticket->Id }}"><img
-                                                                src="/viewDetails.png" height="30"
-                                                                width="30">Close Ticket
-                                                        </a>
-                                                    @else
-                                                        <a class="dropdown-item"
-                                                            href="/ticket/open/{{ $ticket->Id }}"><img
-                                                                src="/viewDetails.png" height="30"
-                                                                width="30">Open Ticket
-                                                        </a>
-                                                    @endif
-
-
-
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                @endforeach
-
-
-
-                            </tbody>
-                        </table>
-
-                        <!-- end table -->
-                    </div>
 
 
                 </div>
@@ -650,7 +547,6 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
-
     <!-- JAVASCRIPT -->
     <script src="/assets/libs/jquery/jquery.min.js"></script>
     <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -681,7 +577,29 @@
     <!-- Datatable init js -->
     <script src="/assets/js/pages/datatables.init.js"></script>
 
+    <!-- dropzone js -->
+    <script src="/assets/libs/dropzone/min/dropzone.min.js"></script>
+
+    <!-- ckeditor -->
+    <script src="/assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
+
+    <!-- init js -->
+    <script src="/assets/js/pages/form-editor.init.js"></script>
+
     <script src="/assets/js/app.js"></script>
+
+    <!-- choices js -->
+    <script src="/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
+
+    <!-- color picker js -->
+    <script src="/assets/libs/@simonwep/pickr/pickr.min.js"></script>
+    <script src="/assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
+
+    <!-- datepicker js -->
+    <script src="/assets/libs/flatpickr/flatpickr.min.js"></script>
+
+    <!-- init js -->
+    <script src="/assets/js/pages/form-advanced.init.js"></script>
 
 </body>
 

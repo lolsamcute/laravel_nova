@@ -31,16 +31,6 @@
     <!-- App Css-->
     <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
 
-    <!-- dropzone css -->
-    <link href="/assets/libs/dropzone/min/dropzone.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- choices css -->
-    <link href="/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- color picker css -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
 </head>
 
 <body>
@@ -56,7 +46,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="index.html" class="logo logo-dark">
+                        <a href="/app/dashboard" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -65,7 +55,7 @@
                             </span>
                         </a>
 
-                        <a href="index.html" class="logo logo-light">
+                        <a href="/app/dashboard" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -205,195 +195,217 @@
                             <a class="mb-sm-0 font-size-18" onclick="history.back()">
                                 < Back</a>
                             </a>
-                            <h2 class="text-center">Write New Post</h2><br>
-                            <h6 class="text-center">Create your own post by creating your own words and content.</h6>
-
-
-
+                            <h2 class="text-center">Incidents</h2><br>
 
                     </div>
                     <br><br><br>
                     <!-- start page title -->
 
+                    <div class="col-12">
 
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Blog Posts</h4>
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
 
-                            </div>
-                            <div class="card-body p-4">
+                            <form method="GET" action="">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
 
-                                <form method="POST" action="/app/blog/createPost" enctype="multipart/form-data">
-                                    @csrf
+                                        <li>
+                                            <label>Search</label>
+                                            <input class="form-control" type="text" name="search"
+                                                placeholder="Click here to Search">
+                                        </li>
 
-                                    <div class="col-lg-12">
-
-
-                                        <div class="col-lg-10">
-                                            <label for="floatingInput">Post Title</label> - choose a name for the
-                                            product
-                                            <input type="text" name="Title" class="form-control"
-                                                id="floatingInput" placeholder="The product name anywhere it appears">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
 
-                                        </div>
+                                        <li>
+                                            <label>Show</label>
+                                            <select class="form-control col-lg-10" name="department">
 
-                                    </div>
+                                                <option value="Billing">
+                                                    Today
+                                                </option>
 
-                                    <br>
-                                    <div class="row">
-                                        <label for="example-text-input" class="form-label">Categories</label>
-                                        <br>
-                                        <div class="row">
+                                            </select>
+                                        </li>
 
-                                            @foreach ($categories as $category)
-                                                <div class="col-md-6">
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" name="Category"
-                                                            value="{{ $category->Category }}" type="checkbox">
-                                                        <label class="form-check-label">
-                                                            {{ $category->Category }}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
+                                        <li>
+                                            <label>Incidents</label>
+                                            <select class="form-control col-lg" name="tickets">
+                                                <option value="All">
+                                                    Resolved
+                                                </option>
 
+                                            </select>
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
+                                        <li>
+                                            <label>From</label>
+                                            <input class="form-control" type="date" id="dateFrom"
+                                                name="dateFrom" value="{{ request('dateFrom') }}">
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                        </div>
-                                    </div>
+                                        <li>
+                                            <label>To</label>
+                                            <input class="form-control" type="date" id="dateTo" name="dateTo"
+                                                value="{{ request('dateTo') }}">
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
 
-                                    <!-- Start Create a New Category Modal -->
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add
-                                        New Category
-                                    </a>
+                                        <li>
+                                            <label>.</label>
+                                            <button type="submit"
+                                                class="form-control btn btn-primary">Filter</button>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </form>
 
-
-                                    <!-- End Create a New Category Modal -->
-
-
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-                                            <label for="floatingInput">Tags</label> - choose a name for the product
-
-                                            <input name="Tags" class="form-control"
-                                                id="choices-text-unique-values" type="text" placeholder="messages"
-                                                class="custom class" />
-                                        </div>
-
-                                    </div>
-
-                                    <br>
-
-                                    <div class="row">
-                                        <label for="example-text-input" class="form-label">Featured Image</label>
-                                        <br>
-                                        <div class="col-10">
-                                            <div class="card">
-                                                <div class="card-header">
-
-                                                    <p class="card-title-desc">This image will be displayed on your
-                                                        blog
-                                                        post!
-                                                    </p>
-                                                </div>
-                                                <div class="card-body">
-
-                                                    <div>
-
-                                                        <div class="fallback">
-                                                            <input name="Thumbnail" type="file">
-                                                        </div>
-                                                        <div class="dz-message needsclick">
-                                                            <div class="mb-3">
-                                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
-                                                            </div>
-
-                                                            <h5>Drag & Drop or Upload Image </h5>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="text-center mt-4">
-                                                        <p style="color: red">Allowed Files: PNG, JPG | Maximum
-                                                            file
-                                                            size:
-                                                            5MB | Dimention: 1600 by 1022</p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col -->
-                                        <!-- Start Create a New Image Modal -->
-                                        <a href="" data-bs-toggle="modal"
-                                            data-bs-target="#imagestaticBackdrop"> +
-                                            Add Image properties
-                                        </a>
-
-
-                                        <!-- End Create a New Image Modal -->
-                                    </div>
-
-
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-
-                                            <label for="floatingInput">URL Slug </label>- enter url slug
-                                            <textarea id="basicpill-address-input" name="UrlSlug" class="form-control" rows="3"
-                                                placeholder="Write an excerpt"></textarea>
-
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-
-                                            <label for="floatingInput">Post Description</label> - add a description for
-                                            your post
-
-                                            <textarea name="Description" id="ckeditor-classic"></textarea>
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    @include('pages.blog.modal.image')
-
-                                    <br>
-                                    <div class="col-lg-6">
-                                        <div class="text-center modal-footer">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Save
-                                                As
-                                                Draft</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" class="btn btn-primary">Publish
-                                                Blog
-                                                Post</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
 
                         </div>
-
                     </div>
 
+                    <!-- end page title -->
 
 
 
+
+
+                    <br>
+                    <!-- Start Ticket -->
+                    <div class="row">
+
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <img src="/users.png" height="70" width="80">
+                                        </div>
+
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">All Reports</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value"
+                                                    data-target="0">0</span>
+                                            </h4>
+                                        </div>
+
+
+                                    </div>
+
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <img src="/active.png" height="70" width="80">
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">All Resolved
+                                                </span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value"
+                                                    data-target="0">0</span>
+                                            </h4>
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col-->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <img src="/inactive.png" height="70" width="80">
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">UnResolved
+                                                </span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value"
+                                                    data-target="0">0</span>
+                                            </h4>
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-h-100">
+                                <!-- card body -->
+                                <div class="card-body">
+                                    <div class="row align-items-center">
+                                        <div class="col-6">
+                                            <img src="/deleted.png" height="70" width="80">
+                                        </div>
+                                        <div class="col-6">
+                                            <span class="text-muted mb-3 lh-1 d-block text-truncate">Blacklisted</span>
+                                            <h4 class="mb-3">
+                                                <span class="counter-value"
+                                                    data-target="0">0</span>
+                                            </h4>
+                                        </div>
+
+                                    </div>
+
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+                    </div>
+
+                    <!--End Ticket -->
+
+
+
+                    <div class="table-responsive mb-4">
+                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Report ID</th>
+                                    <th scope="col">Kreators</th>
+                                    <th scope="col">Affiliate Reported</th>
+                                    <th scope="col">Report Message</th>
+                                    <th scope="col">Attached File</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                    <th>Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+
+
+
+
+
+                            </tbody>
+                        </table>
+
+                        <!-- end table -->
+                    </div>
 
 
                 </div>
@@ -402,7 +414,8 @@
             <!-- End Page-content -->
 
 
-            @include('pages.blog.modal.category')
+
+
 
             <footer class="footer">
                 <div class="container-fluid">
@@ -597,29 +610,7 @@
     <!-- Datatable init js -->
     <script src="/assets/js/pages/datatables.init.js"></script>
 
-    <!-- dropzone js -->
-    <script src="/assets/libs/dropzone/min/dropzone.min.js"></script>
-
-    <!-- ckeditor -->
-    <script src="/assets/libs/@ckeditor/ckeditor5-build-classic/build/ckeditor.js"></script>
-
-    <!-- init js -->
-    <script src="/assets/js/pages/form-editor.init.js"></script>
-
     <script src="/assets/js/app.js"></script>
-
-    <!-- choices js -->
-    <script src="/assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-
-    <!-- color picker js -->
-    <script src="/assets/libs/@simonwep/pickr/pickr.min.js"></script>
-    <script src="/assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
-
-    <!-- datepicker js -->
-    <script src="/assets/libs/flatpickr/flatpickr.min.js"></script>
-
-    <!-- init js -->
-    <script src="/assets/js/pages/form-advanced.init.js"></script>
 
 </body>
 

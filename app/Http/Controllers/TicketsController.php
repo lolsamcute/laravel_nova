@@ -175,4 +175,66 @@ class TicketsController extends Controller
     }
 
 
+     public function incidents(Request $request)
+    {
+        $filter = $request->input('filter', 'all');
+
+        // $getAllTickets = DB::connection('sqlsrv')
+        //     ->table('Tickets')
+        //     ->join('AspNetUsers', 'Tickets.UserId', '=', 'AspNetUsers.Id')
+        //     ->select(
+        //         'AspNetUsers.Fullname',
+        //         'AspNetUsers.Email',
+        //         'Tickets.Id',
+        //         'Tickets.Heading',
+        //         'Tickets.TicketReference',
+        //         'Tickets.Department',
+        //         'Tickets.Status',
+        //         'Tickets.UserId',
+        //         'Tickets.CreatedAt'
+        //     )
+        //     ->latest('Tickets.CreatedAt')
+        //     ->get();
+
+
+        // $countAllTickets = $getAllTickets->count();
+        // $countOpenTickets = $getAllTickets->where('Status', 'open')->count();
+        // $countClosedTickets = $getAllTickets->where('Status', 'Closed')->count();
+        // $countAdminReplies = 0;
+
+        return view('pages.support.incidents.index');
+    }
+
+
+    public function paymentIntegration(Request $request)
+    {
+        $filter = $request->input('filter', 'all');
+
+        // $getAllTickets = DB::connection('sqlsrv')
+        //     ->table('Tickets')
+        //     ->join('AspNetUsers', 'Tickets.UserId', '=', 'AspNetUsers.Id')
+        //     ->select(
+        //         'AspNetUsers.Fullname',
+        //         'AspNetUsers.Email',
+        //         'Tickets.Id',
+        //         'Tickets.Heading',
+        //         'Tickets.TicketReference',
+        //         'Tickets.Department',
+        //         'Tickets.Status',
+        //         'Tickets.UserId',
+        //         'Tickets.CreatedAt'
+        //     )
+        //     ->latest('Tickets.CreatedAt')
+        //     ->get();
+
+
+        // $countAllTickets = $getAllTickets->count();
+        // $countOpenTickets = $getAllTickets->where('Status', 'open')->count();
+        // $countClosedTickets = $getAllTickets->where('Status', 'Closed')->count();
+        // $countAdminReplies = 0;
+
+        return view('pages.support.paymentIntegration.index');
+    }
+
+
 }

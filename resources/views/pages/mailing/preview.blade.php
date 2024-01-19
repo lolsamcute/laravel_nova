@@ -11,7 +11,6 @@
     <!-- App favicon -->
     <link rel="shortcut icon" href="/logo/svg">
 
-
     <!-- DataTables -->
     <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
     <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
@@ -41,6 +40,7 @@
     <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
     <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
     <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
+
 </head>
 
 <body>
@@ -56,7 +56,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="index.html" class="logo logo-dark">
+                        <a href="/app/dashboard" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -65,7 +65,7 @@
                             </span>
                         </a>
 
-                        <a href="index.html" class="logo logo-light">
+                        <a href="/app/dashboard" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -191,6 +191,7 @@
         <!-- ============================================================== -->
         <!-- Start right Content here -->
         <!-- ============================================================== -->
+
         <div class="main-content">
 
             @include('layouts.badge')
@@ -200,201 +201,45 @@
                 <div class="container-fluid">
                     <div class="row">
 
+                        <a class="mb-sm-0 font-size-18" onclick="history.back()">
+                            < Back </a>
+                                {{-- <h2 class="text-center">Send Mail</h2><br>
+                                <h6 class="text-center">Create your post by using your own words and content</h6> --}}
 
-                        <a href="">
-                            <a class="mb-sm-0 font-size-18" onclick="history.back()">
-                                < Back</a>
-                            </a>
-                            <h2 class="text-center">Write New Post</h2><br>
-                            <h6 class="text-center">Create your own post by creating your own words and content.</h6>
+                                <div class="col-12">
+                                    <br>
+                                    <div class="card">
+
+                                        <div class="card-body">
+
+                                            <br>
+                                            <h4 class="font-size-20">Hey GraceMoments,</h4>
 
 
+                                            <p>You have successfully activated 2FA Authentication on your account on
+                                                <a href="https://kreatesell.com">kreatesell.com</a>
+                                            </p><br>
+
+                                            <p> This will make your account secure from fraudsters. Don’t forget, you’ll
+                                                be receiving authentication code on this email to be able to access your
+                                                account in future.</p><br>
+
+                                            <p>Thanks.</p><br>
+
+
+                                            <p>KreateSell Team</p>
+
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
 
 
                     </div>
                     <br><br><br>
                     <!-- start page title -->
-
-
-                    <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">
-                                <h4 class="card-title">Blog Posts</h4>
-
-                            </div>
-                            <div class="card-body p-4">
-
-                                <form method="POST" action="/app/blog/createPost" enctype="multipart/form-data">
-                                    @csrf
-
-                                    <div class="col-lg-12">
-
-
-                                        <div class="col-lg-10">
-                                            <label for="floatingInput">Post Title</label> - choose a name for the
-                                            product
-                                            <input type="text" name="Title" class="form-control"
-                                                id="floatingInput" placeholder="The product name anywhere it appears">
-
-
-                                        </div>
-
-                                    </div>
-
-                                    <br>
-                                    <div class="row">
-                                        <label for="example-text-input" class="form-label">Categories</label>
-                                        <br>
-                                        <div class="row">
-
-                                            @foreach ($categories as $category)
-                                                <div class="col-md-6">
-
-                                                    <div class="form-check mb-3">
-                                                        <input class="form-check-input" name="Category"
-                                                            value="{{ $category->Category }}" type="checkbox">
-                                                        <label class="form-check-label">
-                                                            {{ $category->Category }}
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                            @endforeach
-
-
-
-                                        </div>
-                                    </div>
-
-                                    <!-- Start Create a New Category Modal -->
-                                    <a href="" data-bs-toggle="modal" data-bs-target="#staticBackdrop"> + Add
-                                        New Category
-                                    </a>
-
-
-                                    <!-- End Create a New Category Modal -->
-
-
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-                                            <label for="floatingInput">Tags</label> - choose a name for the product
-
-                                            <input name="Tags" class="form-control"
-                                                id="choices-text-unique-values" type="text" placeholder="messages"
-                                                class="custom class" />
-                                        </div>
-
-                                    </div>
-
-                                    <br>
-
-                                    <div class="row">
-                                        <label for="example-text-input" class="form-label">Featured Image</label>
-                                        <br>
-                                        <div class="col-10">
-                                            <div class="card">
-                                                <div class="card-header">
-
-                                                    <p class="card-title-desc">This image will be displayed on your
-                                                        blog
-                                                        post!
-                                                    </p>
-                                                </div>
-                                                <div class="card-body">
-
-                                                    <div>
-
-                                                        <div class="fallback">
-                                                            <input name="Thumbnail" type="file">
-                                                        </div>
-                                                        <div class="dz-message needsclick">
-                                                            <div class="mb-3">
-                                                                <i class="display-4 text-muted bx bx-cloud-upload"></i>
-                                                            </div>
-
-                                                            <h5>Drag & Drop or Upload Image </h5>
-                                                        </div>
-
-                                                    </div>
-
-                                                    <div class="text-center mt-4">
-                                                        <p style="color: red">Allowed Files: PNG, JPG | Maximum
-                                                            file
-                                                            size:
-                                                            5MB | Dimention: 1600 by 1022</p>
-                                                    </div>
-
-                                                </div>
-                                            </div>
-                                        </div> <!-- end col -->
-                                        <!-- Start Create a New Image Modal -->
-                                        <a href="" data-bs-toggle="modal"
-                                            data-bs-target="#imagestaticBackdrop"> +
-                                            Add Image properties
-                                        </a>
-
-
-                                        <!-- End Create a New Image Modal -->
-                                    </div>
-
-
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-
-                                            <label for="floatingInput">URL Slug </label>- enter url slug
-                                            <textarea id="basicpill-address-input" name="UrlSlug" class="form-control" rows="3"
-                                                placeholder="Write an excerpt"></textarea>
-
-
-                                        </div>
-
-                                    </div>
-
-                                    <div class="col-lg-12">
-
-                                        <br>
-                                        <div class="col-lg-10">
-
-                                            <label for="floatingInput">Post Description</label> - add a description for
-                                            your post
-
-                                            <textarea name="Description" id="ckeditor-classic"></textarea>
-
-                                        </div>
-
-                                    </div>
-
-
-
-                                    @include('pages.blog.modal.image')
-
-                                    <br>
-                                    <div class="col-lg-6">
-                                        <div class="text-center modal-footer">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Save
-                                                As
-                                                Draft</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <button type="submit" class="btn btn-primary">Publish
-                                                Blog
-                                                Post</button>
-                                        </div>
-                                    </div>
-                                </form>
-                            </div>
-
-                        </div>
-
-                    </div>
-
-
-
-
-
 
                 </div>
                 <!-- container-fluid -->
@@ -402,7 +247,8 @@
             <!-- End Page-content -->
 
 
-            @include('pages.blog.modal.category')
+
+
 
             <footer class="footer">
                 <div class="container-fluid">
@@ -565,7 +411,6 @@
 
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
-
 
     <!-- JAVASCRIPT -->
     <script src="/assets/libs/jquery/jquery.min.js"></script>

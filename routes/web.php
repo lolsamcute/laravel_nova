@@ -97,5 +97,15 @@ Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login']
     Route::post('/ticket/reply/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketReplyPost'])->name('ticketReplyPost');
     Route::get('/ticket/open/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketOpen'])->name('ticketOpen');
     Route::get('/ticket/close/{Id}', [App\Http\Controllers\TicketsController::class, 'ticketClose'])->name('ticketClose');
+    Route::get('/ticket/incidents', [App\Http\Controllers\TicketsController::class, 'incidents'])->name('incidents');
+    Route::get('/ticket/paymentIntegration', [App\Http\Controllers\TicketsController::class, 'paymentIntegration'])->name('paymentIntegration');
+
+
+    //Tickets
+    Route::get('/app/mailing', [App\Http\Controllers\MailingController::class, 'index'])->name('index');
+    Route::get('/app/mailing/create', [App\Http\Controllers\MailingController::class, 'create'])->name('create');
+    Route::post('/app/mailing/create', [App\Http\Controllers\MailingController::class, 'createPost'])->name('createPost');
+    Route::get('/app/mailing/edit', [App\Http\Controllers\MailingController::class, 'edit'])->name('edit');
+    Route::get('/app/mailing/preview', [App\Http\Controllers\MailingController::class, 'preview'])->name('preview');
 // });
 
