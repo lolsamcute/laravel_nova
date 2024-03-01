@@ -134,14 +134,31 @@
                   </li>
 
                   <li>
-                      <a href="javascript: void(0);">
-                          <i data-feather="pie-chart"></i>
-                          <span data-key="t-charts">Recruitment</span>
+                      <a href="javascript: void(0);" class="has-arrow">
+                          <i data-feather="box"></i>
+                          <span data-key="t-horizontal">Recruitment</span>
                       </a>
+                      <ul class="sub-menu" aria-expanded="false">
+
+                          <li>
+                              <a href="/app/user/recruitment">
+                                  <span data-key="t-chat">Applicants</span>
+                              </a>
+                          </li>
+
+                          <li>
+                              <a href="/app/user/job">
+                                  <span data-key="t-calendar">Jobs</span>
+                              </a>
+                          </li>
+
+
+                      </ul>
+
                   </li>
 
                   <li>
-                      <a href="javascript: void(0);">
+                      <a href="/app/user/settings">
                           <i data-feather="cpu"></i>
                           <span data-key="t-icons">Settings</span>
                       </a>

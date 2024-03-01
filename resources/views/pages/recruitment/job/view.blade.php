@@ -6,13 +6,19 @@
     <meta charset="utf-8" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="/logo/svg">
 
-    <!-- plugin css -->
-    <link href="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+
+    <!-- DataTables -->
+    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
     <!-- preloader css -->
@@ -24,27 +30,6 @@
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
-    <!-- choices css -->
-    <link href="/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- color picker css -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
-
-    <!-- datepicker css -->
-    <link rel="stylesheet" href="/assets/libs/flatpickr/flatpickr.min.css">
-
-    <!-- DataTables -->
-    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
-    <!-- Responsive datatable examples -->
-    <link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
 
 </head>
 
@@ -61,7 +46,7 @@
                 <div class="d-flex">
                     <!-- LOGO -->
                     <div class="navbar-brand-box">
-                        <a href="/app/dashboard" class="logo logo-dark">
+                        <a href="index.html" class="logo logo-dark">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -70,7 +55,7 @@
                             </span>
                         </a>
 
-                        <a href="/app/dashboard" class="logo logo-light">
+                        <a href="index.html" class="logo logo-light">
                             <span class="logo-sm">
                                 <img src="/logo.svg" alt="" height="24">
                             </span>
@@ -167,8 +152,8 @@
                             <!-- item-->
                             <a class="dropdown-item" href="apps-contacts-profile.html"><i
                                     class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
-                            <a class="dropdown-item" href="auth-lock-screen.html"><i
-                                    class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
+                            {{-- <a class="dropdown-item" href="auth-lock-screen.html"><i
+                                    class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a> --}}
                             <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item" href="{{ url('logout') }}"
@@ -201,29 +186,117 @@
             @include('layouts.badge')
 
 
-            @yield('content')
-
-
-
-
-            <footer class="footer">
+            <div class="page-content">
                 <div class="container-fluid">
+                    <a class="mb-sm-0 font-size-18" onclick="history.back()">
+                        < Back</a>
+                    </a>
+                    <h2 class="text-center">Product Development</h2><br>
+                    <p>Faucibus Justo et in a djds kds dsllsds sdkdsjdsksl lds</p>
+
+
                     <div class="row">
-                        <div class="col-sm-6">
-                            <script>
-                                document.write(new Date().getFullYear())
-                            </script> © {{ config('app.name', 'Laravel') }}.
-                        </div>
-                        <div class="col-sm-6">
-                            <div class="text-sm-end d-none d-sm-block">
-                                Design & Develop by <a href="#!" class="text-decoration-underline">KreateSell</a>
+                        <div class="col-lg-12">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="row">
+
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <h6 class="text-center ">Job ID: 1223678 | Applied 1 day ago</h6><br>
+                                                <h3 class="text-center">Frontend Developer &nbsp;&nbsp;&nbsp;<br>
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <br>
+                                                        <a
+                                                            class="badge bg-success-subtle text-primary text-center">Open</a>
+
+                                                    </div>
+                                                    <br><br>
+
+                                                </h3>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="card">
+                                                <div class="mt-8 text-center">
+                                                    <br>
+                                                    <button class="btn btn-primary">View Applicants</button><br><br>
+                                                    <button class="btn btn-secondary">Delete Job</button>
+                                                </div>
+                                                <br><br>
+
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4">
+                                            <div class="card">
+
+                                                <div class="mt-8">
+
+                                                    <h3 class="text-center">Number of Application</h3>
+                                                    <br>
+
+
+                                                    <h2 class="text-center">43</h2><br>
+                                                    <div class="d-flex justify-content-center gap-2">
+                                                        <a
+                                                            class="badge bg-danger-subtle text-danger text-center">Pending</a>
+                                                    </div>
+                                                    <br><br>
+
+
+                                                </div>
+                                            </div>
+                                        </div>
+
+
+                                    </div>
+
+
+
+
+                                </div>
+                                <!-- end card body -->
                             </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col -->
+
+
+                    </div> <!-- container-fluid -->
+                </div>
+                <!-- End Page-content -->
+
+
+            </div>
+            <!-- container-fluid -->
+        </div>
+        <!-- End Page-content -->
+
+
+
+
+
+        <footer class="footer">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <script>
+                            document.write(new Date().getFullYear())
+                        </script> © {{ config('app.name', 'Laravel') }}.
+                    </div>
+                    <div class="col-sm-6">
+                        <div class="text-sm-end d-none d-sm-block">
+                            Design & Develop by <a href="#!" class="text-decoration-underline">KreateSell</a>
                         </div>
                     </div>
                 </div>
-            </footer>
-        </div>
-        <!-- end main content-->
+            </div>
+        </footer>
+    </div>
+    <!-- end main content-->
 
     </div>
     <!-- END layout-wrapper -->
@@ -368,6 +441,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
+
     <!-- JAVASCRIPT -->
     <script src="/assets/libs/jquery/jquery.min.js"></script>
     <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -377,17 +451,6 @@
     <script src="/assets/libs/feather-icons/feather.min.js"></script>
     <!-- pace js -->
     <script src="/assets/libs/pace-js/pace.min.js"></script>
-
-    <!-- apexcharts -->
-    <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
-
-    <!-- Plugins js-->
-    <script src="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- dashboard init -->
-    <script src="/assets/js/pages/dashboard.init.js"></script>
-
-    <script src="/assets/js/app.js"></script>
 
     <!-- Required datatable js -->
     <script src="/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -406,27 +469,12 @@
     <script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-    <!-- init js -->
-    <script src="/assets/js/pages/datatable-pages.init.js"></script>
+    <!-- Datatable init js -->
+    <script src="/assets/js/pages/datatables.init.js"></script>
 
-    <!-- datepicker js -->
-    <script src="/assets/libs/flatpickr/flatpickr.min.js"></script>
-
-    <!-- init js -->
-    <script src="/assets/js/pages/form-advanced.init.js"></script>
-
-    <!-- Chart JS -->
-    <script src="/assets/libs/chart.js/chart.umd.js"></script>
-    <!-- chartjs init -->
-    <script src="/assets/js/pages/chartjs.init.js"></script>
+    <script src="/assets/js/app.js"></script>
 
 
-    <!-- choices js -->
-    <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-
-    <!-- color picker js -->
-    <script src="assets/libs/@simonwep/pickr/pickr.min.js"></script>
-    <script src="assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
 
 
 </body>

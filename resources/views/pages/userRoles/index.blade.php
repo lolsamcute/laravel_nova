@@ -206,18 +206,21 @@
                                             <i class="bx bx-dots-horizontal-rounded"></i>
                                         </button>
                                         <ul class="dropdown-menu dropdown-menu-end">
-                                            <a class="dropdown-item" href="index.html#"><img src="/edit.png" height="30"
-                                                    width="30">Edit Profile</a>
-                                            <a class="dropdown-item" href="index.html#"><img src="/assignPri.png"
-                                                    height="30" width="30">Assign Priviledges</a>
-                                            <a class="dropdown-item" href="index.html#"><img src="/activities.png"
-                                                    height="30" width="30">Activities</a>
-                                            <a class="dropdown-item" href="index.html#"><img src="/deactivate.png"
-                                                    height="30" width="30">Deactivate</a>
+                                            <a class="dropdown-item" href="/app/user/edit/profile/{ $user->Id }}"><img
+                                                    src="/edit.png" height="30" width="30">Edit Profile</a>
+                                            <a class="dropdown-item" data-bs-toggle="modal"
+                                                data-bs-target="#myPrivilgdeModal{{ $user->Id }}"><img
+                                                    src="/assignPri.png" height="30" width="30">Assign
+                                                Priviledges</a>
+                                            <a class="dropdown-item" href="/app/user/activities/{{ $user->Id }}"><img
+                                                    src="/activities.png" height="30" width="30">Activities</a>
+                                            <a class="dropdown-item" href="/app/user/deactivate/{{ $user->Id }}"><img
+                                                    src="/deactivate.png" height="30" width="30">Deactivate</a>
                                         </ul>
                                     </div>
                                 </td>
                         </tr>
+                        @include('pages.userRoles.modals.priviledge')
                         @endforeach
 
 
@@ -232,6 +235,7 @@
 
 
             @include('pages.userRoles.modals.createUser')
+
 
 
         </div>

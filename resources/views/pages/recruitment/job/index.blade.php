@@ -6,13 +6,19 @@
     <meta charset="utf-8" />
     <title>{{ config('app.name', 'Laravel') }}</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta content="Premium Multipurpose Admin & Dashboard Template" name="description" />
-    <meta content="Themesbrand" name="author" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
     <!-- App favicon -->
     <link rel="shortcut icon" href="/logo/svg">
 
-    <!-- plugin css -->
-    <link href="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.css" rel="stylesheet"
+
+    <!-- DataTables -->
+    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
+        type="text/css" />
+
+    <!-- Responsive datatable examples -->
+    <link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
         type="text/css" />
 
     <!-- preloader css -->
@@ -24,27 +30,6 @@
     <link href="/assets/css/icons.min.css" rel="stylesheet" type="text/css" />
     <!-- App Css-->
     <link href="/assets/css/app.min.css" id="app-style" rel="stylesheet" type="text/css" />
-
-    <!-- choices css -->
-    <link href="/assets/libs/choices.js/public/assets/styles/choices.min.css" rel="stylesheet" type="text/css" />
-
-    <!-- color picker css -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/classic.min.css" /> <!-- 'classic' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/monolith.min.css" /> <!-- 'monolith' theme -->
-    <link rel="stylesheet" href="/assets/libs/@simonwep/pickr/themes/nano.min.css" /> <!-- 'nano' theme -->
-
-    <!-- datepicker css -->
-    <link rel="stylesheet" href="/assets/libs/flatpickr/flatpickr.min.css">
-
-    <!-- DataTables -->
-    <link href="/assets/libs/datatables.net-bs4/css/dataTables.bootstrap4.min.css" rel="stylesheet" type="text/css" />
-    <link href="/assets/libs/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
-    <!-- Responsive datatable examples -->
-    <link href="/assets/libs/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css" rel="stylesheet"
-        type="text/css" />
-
 
 </head>
 
@@ -167,8 +152,8 @@
                             <!-- item-->
                             <a class="dropdown-item" href="apps-contacts-profile.html"><i
                                     class="mdi mdi mdi-face-man font-size-16 align-middle me-1"></i> Profile</a>
-                            <a class="dropdown-item" href="auth-lock-screen.html"><i
-                                    class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a>
+                            {{-- <a class="dropdown-item" href="auth-lock-screen.html"><i
+                                    class="mdi mdi-lock font-size-16 align-middle me-1"></i> Lock Screen</a> --}}
                             <div class="dropdown-divider"></div>
 
                             <a class="dropdown-item" href="{{ url('logout') }}"
@@ -201,7 +186,198 @@
             @include('layouts.badge')
 
 
-            @yield('content')
+            <div class="page-content">
+                <div class="container-fluid">
+                    <div class="row">
+
+
+                        <a href="">
+                            <a class="mb-sm-0 font-size-18" onclick="history.back()">
+                                < Back</a>
+                            </a>
+                            <h2 class="text-center">Job Lists</h2><br>
+                            <div class="page-title-right">
+                                <ol class="breadcrumb m-0">
+
+                                    <li>
+
+                                        <a class="form-control btn btn-primary" data-bs-toggle="modal"
+                                            data-bs-target="#myModal">
+                                            + Create New Jobs</a>
+                                    </li>
+
+                                </ol>
+                            </div>
+
+
+                    </div>
+                    <br><br><br>
+                    <!-- start page title -->
+
+                    <div class="col-12">
+
+                        <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+
+                            <form method="GET" action="{{ route('filterTransactions') }}">
+                                <div class="page-title-right">
+                                    <ol class="breadcrumb m-0">
+
+                                        <li>
+                                            <label>Show</label>
+                                            <input class="form-control" type="text" name="search"
+                                                placeholder="Click here to Search">
+                                        </li>
+
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+
+                                        <li>
+                                            <label>Sort</label>
+                                            <select class="form-control col-lg" name="currency">
+                                                <option selected>Job Type</option>
+                                                <option value="Frontend">
+                                                    Frontend
+                                                </option>
+
+
+                                            </select>
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <li>
+                                            <label>From</label>
+                                            <input class="form-control" type="date" id="dateFrom"
+                                                name="dateFrom" value="{{ request('dateFrom') }}">
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <li>
+                                            <label>To</label>
+                                            <input class="form-control" type="date" id="dateTo" name="dateTo"
+                                                value="{{ request('dateTo') }}">
+                                        </li>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;
+
+                                        <li>
+                                            <label>.</label>
+                                            <button type="submit"
+                                                class="form-control btn btn-primary">Filter</button>
+                                        </li>
+                                    </ol>
+                                </div>
+                            </form>
+
+
+                        </div>
+                    </div>
+
+                    <!-- end page title -->
+
+
+                    <!-- start Table -->
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="page-title-box d-sm-flex align-items-center justify-content-between">
+                                <ol class="breadcrumb m-0">
+                                    <li>
+
+                                        <a href=""
+                                            class="form-control btn {{ $filter === 'all' ? 'btn-primary' : 'btn-secondary' }}">
+                                            All
+                                        </a>
+
+                                    </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <li>
+
+                                        <a href=""
+                                            class="form-control btn {{ $filter === 'open' ? 'btn-primary' : 'btn-secondary' }}">
+                                            Open
+                                        </a>
+
+                                    </li>&nbsp;&nbsp;&nbsp;&nbsp;
+                                    <li>
+
+                                        <a href=""
+                                            class="form-control btn {{ $filter === 'closed' ? 'btn-primary' : 'btn-secondary' }}">
+                                            Closed
+                                        </a>
+
+                                    </li>&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+
+                                </ol>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- end page title -->
+
+
+
+                    <div class="table-responsive mb-4">
+                        <table id="datatable-buttons" class="table table-bordered dt-responsive nowrap w-100">
+                            <thead>
+                                <tr>
+
+                                    <th scope="col">Job Lists</th>
+                                    <th scope="col">Number of Applicants</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+
+                                </tr>
+                            </thead>
+                            <tbody>
+
+                                @if (
+                                    ($filter == 'successful' && $trans->Status == 'Successful') ||
+                                        ($filter == 'abandoned' && $trans->Status == 'Abandoned') ||
+                                        ($filter == 'pending' && $trans->Status == 'Pending') ||
+                                        ($filter == 'failed' && $trans->Status == 'Failed') ||
+                                        $filter == 'all')
+                                    <tr>
+
+                                        <td> Frondend Developer <br>Updated 1 day ago
+                                        </td>
+                                        <td>
+
+                                            20 Applicants
+
+                                        </td>
+
+
+
+                                        <td>Jun 12th 2021, 3:50 PM
+                                        </td>
+                                        <td>
+                                            <div class="d-flex gap-2">
+
+                                                <a class="badge bg-success-subtle text-primary">Open</a>
+
+                                            </div>
+                                        </td>
+
+                                        <td><a href="/app/user/jobs/view">...</a></td>
+
+                                    </tr>
+                                @endif
+
+
+
+
+                            </tbody>
+                        </table>
+
+                        <!-- end table -->
+                    </div>
+
+                    @include('pages.recruitment.job.modals.createJobs')
+
+                </div>
+                <!-- container-fluid -->
+            </div>
+            <!-- End Page-content -->
+
 
 
 
@@ -368,6 +544,7 @@
     <!-- Right bar overlay-->
     <div class="rightbar-overlay"></div>
 
+
     <!-- JAVASCRIPT -->
     <script src="/assets/libs/jquery/jquery.min.js"></script>
     <script src="/assets/libs/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -377,17 +554,6 @@
     <script src="/assets/libs/feather-icons/feather.min.js"></script>
     <!-- pace js -->
     <script src="/assets/libs/pace-js/pace.min.js"></script>
-
-    <!-- apexcharts -->
-    <script src="/assets/libs/apexcharts/apexcharts.min.js"></script>
-
-    <!-- Plugins js-->
-    <script src="/assets/libs/admin-resources/jquery.vectormap/jquery-jvectormap-1.2.2.min.js"></script>
-    <script src="/assets/libs/admin-resources/jquery.vectormap/maps/jquery-jvectormap-world-mill-en.js"></script>
-    <!-- dashboard init -->
-    <script src="/assets/js/pages/dashboard.init.js"></script>
-
-    <script src="/assets/js/app.js"></script>
 
     <!-- Required datatable js -->
     <script src="/assets/libs/datatables.net/js/jquery.dataTables.min.js"></script>
@@ -406,28 +572,10 @@
     <script src="/assets/libs/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
     <script src="/assets/libs/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
-    <!-- init js -->
-    <script src="/assets/js/pages/datatable-pages.init.js"></script>
+    <!-- Datatable init js -->
+    <script src="/assets/js/pages/datatables.init.js"></script>
 
-    <!-- datepicker js -->
-    <script src="/assets/libs/flatpickr/flatpickr.min.js"></script>
-
-    <!-- init js -->
-    <script src="/assets/js/pages/form-advanced.init.js"></script>
-
-    <!-- Chart JS -->
-    <script src="/assets/libs/chart.js/chart.umd.js"></script>
-    <!-- chartjs init -->
-    <script src="/assets/js/pages/chartjs.init.js"></script>
-
-
-    <!-- choices js -->
-    <script src="assets/libs/choices.js/public/assets/scripts/choices.min.js"></script>
-
-    <!-- color picker js -->
-    <script src="assets/libs/@simonwep/pickr/pickr.min.js"></script>
-    <script src="assets/libs/@simonwep/pickr/pickr.es5.min.js"></script>
-
+    <script src="/assets/js/app.js"></script>
 
 </body>
 
