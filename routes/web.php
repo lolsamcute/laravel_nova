@@ -55,6 +55,12 @@ Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login']
 
     //User Roles
     Route::get('/app/user/roles', [App\Http\Controllers\UserRoleController::class, 'index'])->name('index');
+    Route::post('/app/user/create/newUser', [App\Http\Controllers\UserRoleController::class, 'index'])->name('index');
+    Route::get('/app/user/edit/profile/{Id}', [App\Http\Controllers\UserRoleController::class, 'editProfile'])->name('editProfile');
+    Route::get('/app/user/activities/{Id}', [App\Http\Controllers\UserRoleController::class, 'activities'])->name('activities');
+    Route::get('/app/user/deactivate/{Id}', [App\Http\Controllers\UserRoleController::class, 'deactivate'])->name('deactivate');
+
+
 
     //Store
     Route::get('/app/store', [App\Http\Controllers\StoreController::class, 'index'])->name('index');
@@ -107,5 +113,14 @@ Route::post('/login', [App\Http\Controllers\Auth\AuthController::class, 'login']
     Route::post('/app/mailing/create', [App\Http\Controllers\MailingController::class, 'createPost'])->name('createPost');
     Route::get('/app/mailing/edit', [App\Http\Controllers\MailingController::class, 'edit'])->name('edit');
     Route::get('/app/mailing/preview', [App\Http\Controllers\MailingController::class, 'preview'])->name('preview');
+
+     //Recruitment
+    Route::get('/app/user/recruitment', [App\Http\Controllers\RecruitmentController::class, 'index'])->name('index');
+    Route::get('/app/user/recruitment/view', [App\Http\Controllers\RecruitmentController::class, 'show'])->name('show');
+    Route::get('/app/user/job', [App\Http\Controllers\RecruitmentController::class, 'IndexJob'])->name('IndexJob');
+    Route::get('/app/user/jobs/view', [App\Http\Controllers\RecruitmentController::class, 'viewJob'])->name('viewJob');
+
+    //Settings
+    Route::get('/app/user/settings', [App\Http\Controllers\SettingsController::class, 'index'])->name('index');
 // });
 

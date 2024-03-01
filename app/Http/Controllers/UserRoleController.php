@@ -26,5 +26,21 @@ class UserRoleController extends Controller
     }
 
 
+    /**
+     * Admin Edit User Profile
+     *
+     * @return \Illuminate\Contracts\Support\Renderable
+     */
+    public function editProfile($Id)
+    {
+
+        // Fetch USERS TABLE
+        $user = DB::connection('sqlsrv')->table('AspNetUsers')->where('Id', $Id)->first();
+        return view('pages.userRoles.editProfile', [
+            'user' => $user,
+        ]);
+    }
+
+
 
 }
